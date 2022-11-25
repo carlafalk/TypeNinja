@@ -1,0 +1,29 @@
+
+POST http://localhost:5183/User
+Content-Type: application/json
+
+{
+    "Id": "1",
+    "EmailAddress": "carl@mail.se",
+    "PassWord": "test123!"
+}
+
+###
+
+GET http://localhost:5183/User
+
+###
+
+POST http://localhost:5183/Highscore
+Content-Type: application/json
+
+{
+    "Id": "3",
+    "UserId": "1",
+    "WPM": 50,
+    "Accuracy": 0.7
+}
+
+###
+
+GET http://localhost:5183/Highscore
