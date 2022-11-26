@@ -22,7 +22,7 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<User>> PostUserAsync(User user)
     {
-        context.Users.Add(user);
+        context.UsersTEST.Add(user);
         await context.SaveChangesAsync();
 
         return Ok(user);
@@ -31,7 +31,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<User>> GetAllUsersAsync()
     {
-        List<User> users = await context.Users.ToListAsync();
+        List<User> users = await context.UsersTEST.ToListAsync();
         return Ok(users);
     }
 }

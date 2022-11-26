@@ -14,11 +14,12 @@ GET http://localhost:5183/User
 
 ###
 
-POST http://localhost:5183/Highscore
+POST https://localhost:7220/Highscore
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybGFmYWxrIiwianRpIjoiNmNmNjQ5OWItMjJmMS00MWE1LWE3MjQtODY1YTA0MDkxOTFhIiwiZXhwIjoxNjY5NDgxMjQ1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.xFf4cpuADBVUnK2dLvKTE1OYL9mRD_ujmLb7aJn4nKo
 
 {
-    "Id": "3",
+    "Id": "2",
     "UserId": "1",
     "WPM": 50,
     "Accuracy": 0.7
@@ -26,4 +27,27 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5183/Highscore
+GET https://localhost:7220/Highscore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybGFmYWxrIiwianRpIjoiNmNmNjQ5OWItMjJmMS00MWE1LWE3MjQtODY1YTA0MDkxOTFhIiwiZXhwIjoxNjY5NDgxMjQ1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.xFf4cpuADBVUnK2dLvKTE1OYL9mRD_ujmLb7aJn4nKo
+
+
+###
+
+POST https://localhost:7220/Authenticate/register
+Content-Type: application/json
+
+{
+    "Username" : "carlafalk",
+    "Email" : "carl@mail.com",
+    "Password" : "test123!T"
+}
+
+###
+
+POST https://localhost:7220/Authenticate/Login
+Content-Type: application/json
+
+{
+    "Username" : "carlafalk",
+    "Password" : "test123!T"
+}
