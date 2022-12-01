@@ -1,13 +1,14 @@
 import { createContext, useContext, useState } from "react";
+import { CurrentUser } from "../models/CurrentUser";
 
 interface CurrentUserContext{
-    username: string, 
-    token:string,
+    currentUser: CurrentUser
+    setCurrentUser: React.Dispatch<React.SetStateAction<CurrentUser>>
 }
 
 const CurrentUserContext = createContext<CurrentUserContext>({
-    username:"",
-    token:"",
+    currentUser: {username:"", token:"",isLoggedIn: false},
+    setCurrentUser: () => {}
 });
 
 interface CurrentUserProviderProps {
@@ -15,14 +16,13 @@ interface CurrentUserProviderProps {
 }
 
 const CurrentUserProvider = ({ children} : CurrentUserProviderProps) => {
-    const [username, setUsername] = useState<string>("")
-    const [token, setToken] = useState<string>("")
+    const [currentUser, setCurrentUser] = useState<CurrentUser>({username:"", token:"",isLoggedIn: false})
 
     return (
         <CurrentUserContext.Provider
             value={{
-                username,
-                token,
+                currentUser,
+                setCurrentUser
             }}
         >
             {children}
