@@ -37,8 +37,8 @@ POST https://localhost:7220/Authenticate/register
 Content-Type: application/json
 
 {
-    "Username" : "carlafalk",
-    "Email" : "carl@mail.com",
+    "Username" : "carlafalks",
+    "Email" : "carl@mail.se",
     "Password" : "test123!T"
 }
 
