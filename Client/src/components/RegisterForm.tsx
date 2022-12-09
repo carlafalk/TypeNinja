@@ -1,23 +1,14 @@
 import { Button, TextField } from "@mui/material";
 import { styled as styledMUI } from '@mui/material/styles';
-import axios from "axios";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
-import YupPassword from "yup-password";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { axiosAPI } from "../utils/APIutils";
+import { RegistrationValidation } from "../utils/YupValidations";
 import { CustomButton } from "./CustomButton";
 
-YupPassword(yup);
-const RegistrationValidation = yup.object({
-  username: yup.string().min(2).max(15,"username can not contain more than 15 characters").required(),
-  password: yup.string().password().minNumbers(1).minUppercase(1).minLowercase(1).minSymbols(1).min(6).required(),
-  email: yup.string().email().required()
-})
-
 export const RegisterForm = () => {
-
   const { currentUser ,setCurrentUser } = useCurrentUser();
   const [customError, setCustomError] = useState("");
   const navigate = useNavigate();
@@ -27,11 +18,6 @@ export const RegisterForm = () => {
         navigate("game/");
     }
   }, [currentUser.isLoggedIn])
-
-  const axiosAPI = axios.create({
-  baseURL: "https://localhost:7220/"
-  })
-
 
   const Register = async(values : {email:string, username: string, password: string}) => {
     try {

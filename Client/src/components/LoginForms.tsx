@@ -1,16 +1,17 @@
-import { Button, TextField, Typography } from '@mui/material';
-import axios from 'axios';
+import { TextField, Typography } from '@mui/material';
 import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useCurrentUser } from '../contexts/CurrentUserContext';
+import { axiosAPI } from '../utils/APIutils';
+import { CustomButton } from './CustomButton';
 
 export const LoginForms = () => {
-//   const [currentUser, setCurrentUser] = useLocalStorage<CurrentUser>("currentUser", {username:"", token:"", isLoggedIn:false});
   const { currentUser ,setCurrentUser } = useCurrentUser();
   const [customError, setCustomError] = useState("");
   const navigate = useNavigate();
+  // const fetchData = useAxios();
 
   useEffect(() => {
     if (currentUser.isLoggedIn) {    
@@ -18,9 +19,36 @@ export const LoginForms = () => {
     }
   }, [currentUser.isLoggedIn])
 
-  const axiosAPI = axios.create({
-    baseURL: "https://localhost:7220/"
-  })
+  // const SignIn = async(values : {username: string, password: string}) => {
+  //   try {
+  //     const fetchCurrentUser = await fetchData(
+  //       "Authenticate/Login",
+  //       "post",
+  //       JSON.stringify({
+  //         username: values.username,
+  //         password: values.password
+  //       }),
+  //       JSON.stringify({ accept : '*/*'})
+  //     )
+  //     const { data, status } = useQuery<CurrentUser>(["currentUser"], fetchCurrentUser)
+      
+  //     if(data && status === "success"){
+  //     setCurrentUser({
+  //       username: data.username,
+  //       token: data.token,
+  //       isLoggedIn: true
+  //     })
+  //     }
+      
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       if (error.message === "Request failed with status code 401") {
+  //         setCustomError("Invalid username/password");
+  //       }
+  //       else console.log(error.message)
+  //     }
+  //   }
+  // }
 
   const SignIn = async(values : {username: string, password: string}) => {
     try {
@@ -70,7 +98,6 @@ export const LoginForms = () => {
               }} 
               variant="outlined" 
               placeholder="Username" 
-              label="username" 
               sx={{borderColor: "#000"}}/>
               
               <TextField 
@@ -82,13 +109,9 @@ export const LoginForms = () => {
               variant="outlined" 
               placeholder="Password" 
               type="password" 
-              label="password" 
-              margin="normal"/>
+              sx={{margin: 1}}/>
               {customError.length > 0 && <ErrorMessage>{customError}</ErrorMessage>}
-                <Button
-                sx={{backgroundColor: "#383038", margin: "10px", borderRadius: 5}} 
-                variant="contained"
-                onClick={() => handleSubmit()}>Sign in</Button>
+              <CustomButton onClick={() => handleSubmit()}>Sign in</CustomButton>
             </>
           )
         }}
@@ -97,8 +120,8 @@ export const LoginForms = () => {
 }
 
 const ErrorMessage = styled(Typography)`
-  color: red;
-  background-color: #3e1f1f;
+  color: #1f0438;
+  background-color: #dec8e9;
   padding:5px 10px;
   border-radius: 10px;
   font-size: 15px;
