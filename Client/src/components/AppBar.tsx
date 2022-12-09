@@ -1,7 +1,7 @@
-import { AppBar as MUIAppBar, Button, styled as styledMUI, Typography } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { AppBar as MUIAppBar, Container, IconButton, styled as styledMUI, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 interface AppBarProps{
@@ -30,18 +30,26 @@ export const AppBar = () => {
   return (
     <>
         {currentUser.isLoggedIn &&
-        <MUIAppBar sx={{backgroundColor:"grey", boxShadow:"none"}}>
-          <AppBarContainer>  
+        <CustomAppBar>
+          <AppBarContainer maxWidth="lg">  
             <AppBarTitle>
               KBW
             </AppBarTitle>
-              <Button onClick={() => LogOut()}>log out</Button>
+            <IconButton aria-label="delete" onClick={() => LogOut()}>
+              <LogoutIcon />
+            </IconButton>
           </AppBarContainer>
-        </MUIAppBar>
+        </CustomAppBar>
         }
     </>
   )
 }
+
+const CustomAppBar = styledMUI(MUIAppBar)`
+  background-color: #92749c;
+  box-shadow: none;
+  padding: 20px 0;
+`;
 
 const AppBarTitle = styledMUI(Typography)`
   font-size: 30px;
@@ -49,9 +57,8 @@ const AppBarTitle = styledMUI(Typography)`
   color: #000000;
 `;
 
-const AppBarContainer = styled.div`
+const AppBarContainer = styledMUI(Container)`
   display: flex;
   justify-content: space-between;
-  width: 60vw;
   align-self: center;
 `;
