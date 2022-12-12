@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import CurrentUserProvider from "./contexts/CurrentUserContext";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <CurrentUserProvider>
@@ -12,4 +12,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       </CurrentUserProvider>
     </BrowserRouter>
   </React.StrictMode>
-)
+);
