@@ -1,19 +1,19 @@
-import { Button } from '@mui/material';
-import { styled as styledMUI } from '@mui/material/styles';
-import { ReactNode } from 'react';
+import { Button } from "@mui/material";
+import { styled as styledMUI } from "@mui/material/styles";
+import { ReactNode } from "react";
 
-interface CustomButtonProps{
-    children: ReactNode;
-    onClick: () => void;
+interface CustomButtonProps {
+  children: ReactNode;
+  onClick: () => void;
 }
 
-export const CustomButton = ({onClick, children} : CustomButtonProps) => {
+export const CustomButton = ({ onClick, children }: CustomButtonProps) => {
   return (
-    <MUIButton 
-    variant="contained"
-    onClick={onClick}>{children}</MUIButton>
-  )
-}
+    <MUIButton variant="contained" onClick={onClick}>
+      {children}
+    </MUIButton>
+  );
+};
 const MUIButton = styledMUI(Button)`
   width: 200px; 
   margin: 10px;
