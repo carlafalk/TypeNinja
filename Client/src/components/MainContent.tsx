@@ -16,9 +16,9 @@ const MainContent = ({ children }: Props) => {
 
 export default MainContent;
 
-    const MainStyled = styled.main`
-      margin-top: 85px;
-      min-height: calc(100vh - 85px);
-      margin-bottom: 6rem;
-    
-    `;
+const MainStyled = styled.main`
+  margin-top: 104px;
+  height: calc(100vh - 104px);
+  margin-bottom: 6rem;
+  background-color: #92749c;
+`;
