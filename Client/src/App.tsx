@@ -15,7 +15,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="" element={<Login />} />
+          <Route index element={<Login />} />
           <Route path="game/" element={<Game />} />
           <Route path="profile/" element={<Profile />}>
             <Route path="highscore/" element={<Highscore />} />

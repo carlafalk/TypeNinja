@@ -38,9 +38,6 @@ export const RegisterForm = () => {
             }));
           }
         });
-      // .finally(() => {
-      //   navigate("game/");
-      // });
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
