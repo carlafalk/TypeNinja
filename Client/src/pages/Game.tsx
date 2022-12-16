@@ -1,12 +1,13 @@
 import { Typography } from "@mui/material";
+import { styled as styledMUI } from "@mui/material/styles";
 import { useState } from "react";
 import styled from "styled-components";
+import words from "../assets/Words.json";
 import MainContent from "../components/MainContent";
 
 export const Game = () => {
-  const [keyPressed, setKeyPressed] = useState("");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const teststring = "mitt namn aer carl och det haer aer ett test";
+  const [shuffledWordList, setShuffledWordList] = useState<string[]>(words.sort(() => 0.5 - Math.random()).slice(0, 100));
 
   const handleRestart = () => {
     setCurrentIndex(0);
@@ -29,7 +30,6 @@ export const Game = () => {
         break;
 
       default:
-        setKeyPressed(key);
         setCurrentIndex((prev) => prev + 1);
         break;
     }
@@ -39,29 +39,46 @@ export const Game = () => {
   return (
     <>
       <MainContent>
-        <WordContainer
+        <WordsContainer
           tabIndex={0}
           onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-            handleKeyPress(e.key) === teststring[currentIndex] ? console.log("correct") : console.log("incorrect");
+            handleKeyPress(e.key) === shuffledWordList[currentIndex] ? console.log("correct") : console.log("incorrect");
             e.preventDefault();
           }}
         >
-          <Typography sx={{ color: "#0009", fontFamily: "Saira Condensed", fontSize: 40, marginRight: 2, letterSpacing: 4 }}>{teststring}</Typography>
-        </WordContainer>
+          {shuffledWordList.map((element) => (
+            <WordContainer>
+              <Word sx={{ color: "#0009" }}>{element}</Word>
+            </WordContainer>
+          ))}
+        </WordsContainer>
       </MainContent>
     </>
   );
 };
 
-const WordContainer = styled.div`
+const WordsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 300px;
   outline: none;
+  overflow: hidden;
+  max-height: 450px;
+`;
+
+const WordContainer = styled.div`
+  margin: 3px 5px;
+`;
+
+const Word = styledMUI(Typography)`
+  font-family: "Saira Condensed";
+  font-size: 40px;
+  letter-spacing: 4;
 `;
 
 const Test = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 300px;
+  color: "#0009";
+  font-family: "Saira Condensed";
+  font-size: 40px;
+  letter-spacing: 4;
 `;
