@@ -1,5 +1,23 @@
 // export const handleRestart = () => {
-//   setCurrentIndex(0);
-//   // reset timer
-//   // reset all colors
-// };
+
+import { letterModel, wordModel } from "../pages/Game";
+
+// build array of words for gamesession
+export const buildArrayOfWordModel = (array: string[]): wordModel[] => {
+  const wordModelArray: wordModel[] = [];
+
+  array.forEach((word) => {
+    const letterModelArray: letterModel[] = [];
+
+    word.split("").forEach((letter) => {
+      letterModelArray.push({
+        value: letter,
+        isCorrect: "default",
+      });
+    });
+    wordModelArray.push({
+      letters: letterModelArray,
+    });
+  });
+  return wordModelArray;
+};

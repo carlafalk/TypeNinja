@@ -1,82 +1,86 @@
 import { Typography } from "@mui/material";
 import { styled as styledMUI } from "@mui/material/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import words from "../assets/Words.json";
 import MainContent from "../components/MainContent";
+import { useGame } from "../contexts/GameContext";
+import { buildArrayOfWordModel as buildWordModelArray } from "../Services/GameServices";
+
+type isCorrectType = "correct" | "incorrect" | "default";
+
+export type wordModel = {
+  letters: letterModel[];
+};
+
+export type letterModel = {
+  isCorrect: isCorrectType;
+  value: string;
+};
 
 export const Game = () => {
-  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [currentLetterIndex, setCurrentLetterIndex] = useState<number>(0);
-  const [shuffledWordList, setShuffledWordList] = useState<string[]>(words.sort(() => 0.5 - Math.random()).slice(0, 100));
+  const [wordModelArray, setWordModelArray] = useState<wordModel[]>([]);
+  const { shuffledWordList, handleRestart, handleBackspace, handleSpace, handleDefaultKeyPress, points } = useGame();
 
-  const handleRestart = () => {
-    setCurrentWordIndex(0);
-    setCurrentLetterIndex(0);
-    // reset timer
-    // reset all colors
-  };
+  useEffect(() => {
+    const array: wordModel[] = buildWordModelArray(shuffledWordList);
+    setWordModelArray(array);
+  }, []);
 
-  const handleBackspace = () => {
-    currentLetterIndex > 0 ? setCurrentLetterIndex((prev) => prev - 1) : setCurrentLetterIndex(0);
-    // reset color on last character
-  };
-  const handleSpace = () => {
-    if (shuffledWordList[currentWordIndex].length === currentLetterIndex) {
-      setCurrentWordIndex((prev) => prev + 1);
-      setCurrentLetterIndex(0);
-      //add point for correct word
-    } else console.log("asdasd");
-  };
+  useEffect(() => {
+    console.log(points);
+  }, [points]);
 
-  const handleKeyPress = (key: string): string => {
-    switch (key) {
-      case "Tab":
-        handleRestart();
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    switch (e.key) {
+      case "Tab": {
+        handleRestart(wordModelArray);
         break;
-      case "Backspace":
-        handleBackspace();
+      }
+      case "Backspace": {
+        handleBackspace(wordModelArray);
         break;
-      case " ":
-        handleSpace();
+      }
+      case " ": {
+        handleSpace(wordModelArray);
         break;
+      }
 
-      default:
-        setCurrentLetterIndex((prev) => prev + 1);
+      default: {
+        handleDefaultKeyPress(e, wordModelArray);
         break;
+      }
     }
-    return key;
   };
 
   return (
     <>
       <MainContent>
+        <Letter>{points}</Letter>
         <WordsContainer
           tabIndex={0}
           onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-            if (handleKeyPress(e.key) === shuffledWordList[currentWordIndex][currentLetterIndex]) {
-              console.log("correct");
-            } else if (e.key === " ") {
-              console.log("space pressed");
-            } else if (e.key === "Backspace") {
-              console.log("backspace pressed");
-            } else if (e.key === "Tab") {
-              console.clear();
-            } else {
-              console.log("incorrect");
-            }
-            // handleKeyPress(e.key) === shuffledWordList[currentWordIndex][currentLetterIndex] ? console.log("correct") : console.log("incorrect");
-            // console.log(e.key);
-            // console.log(currentLetterIndex);
+            handleKeyPress(e);
 
             e.preventDefault();
           }}
         >
-          {shuffledWordList.map((element) => (
-            <WordContainer>
-              <>
-                <Word sx={{ color: "#0009" }}>{element}</Word>
-              </>
+          {wordModelArray.map((word, index) => (
+            <WordContainer key={"word " + index}>
+              {word.letters.map((letter, index) =>
+                letter.isCorrect === "correct" ? (
+                  <Letter key={"letter " + index} style={{ color: "#2f00ae" }}>
+                    {letter.value}
+                  </Letter>
+                ) : letter.isCorrect === "incorrect" ? (
+                  <Letter key={"letter " + index} style={{ color: "#8e1616" }}>
+                    {letter.value}
+                  </Letter>
+                ) : (
+                  <Letter key={"letter " + index} style={{ color: "#0000005b" }}>
+                    {letter.value}
+                  </Letter>
+                )
+              )}
             </WordContainer>
           ))}
         </WordsContainer>
@@ -96,17 +100,13 @@ const WordsContainer = styled.div`
 
 const WordContainer = styled.div`
   margin: 3px 5px;
+  display: flex;
+  flex-direction: row;
 `;
 
-const Word = styledMUI(Typography)`
+const Letter = styledMUI(Typography)`
   font-family: "Saira Condensed";
   font-size: 40px;
-  letter-spacing: 4;
-`;
-
-const Test = styled.div`
-  color: "#0009";
-  font-family: "Saira Condensed";
-  font-size: 40px;
-  letter-spacing: 4;
+  margin-right: 1px;
+  flex-direction: row;
 `;

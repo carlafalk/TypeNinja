@@ -2,12 +2,11 @@
 
 kravlista
 [x] hämta hem en lista med random ord
-[ ] om en bokstav skrivs fel ska den bli röd
-[ ] om en bokstav skrivs fel ska bokstäverna man skriver efter också bli röda till att man korrigerat det första felet
-[ ] om man skriver en bokstav rätt så ska bokstaven "highlightas" med förslagvis en ljusare färg
+[x] om en bokstav skrivs fel ska den bli röd
+[x] om man skriver en bokstav rätt så ska bokstaven "highlightas" med förslagvis en ljusare färg
 [ ] välj en hur länge spelet ska pågå
-[ ] en användare ska kunna starta om spelet när som helst
-[ ] skapa kortkommando för att start om spelet (tab + enter)
+[x] en användare ska kunna starta om spelet när som helst
+[x] skapa kortkommando för att start om spelet (tab + enter)
 
 Highscores
 [ ] ta bort alla highscores
