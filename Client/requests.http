@@ -16,18 +16,19 @@ GET http://localhost:5183/User
 
 POST https://localhost:7220/Highscore
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybGFmYWxrIiwianRpIjoiOTQ5NGJlYzktOTZiMS00MTdlLWI3ZTQtZDkxYWNmYWM3MTFmIiwiZXhwIjoxNjc1MjAzMDg2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TH2pjut2_xu3sBgY8EG44gKzjeipWjghwcr0N8VUeW0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybCIsImp0aSI6IjM3OTgxOGU4LWEyYjItNGRjMi1hY2IyLTMzY2YyY2ZmZDU3YyIsImV4cCI6MTcwODE4NTYxNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.SM0JJMtlsUeCeW8t_c5OlVAmlcZbwLJc3pmBLekPHgE
 
 {
-    "Id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "UserId": "4b15a579-5dab-4a4b-96d1-e51be121f807",
-    "WPM": 50,
-    "Accuracy": 60
+    "Id": "358ffdb7-d170-41f4-af17-31663c3ee44e",
+    "UserId": "595c547f-4e25-4df4-a803-9820b7fa29bb",
+    "WPM": 111,
+    "Accuracy": 90
 }
 
 ###
 
 GET https://localhost:7220/Highscore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybCIsImp0aSI6IjM3OTgxOGU4LWEyYjItNGRjMi1hY2IyLTMzY2YyY2ZmZDU3YyIsImV4cCI6MTcwODE4NTYxNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.SM0JJMtlsUeCeW8t_c5OlVAmlcZbwLJc3pmBLekPHgE
 
 
 

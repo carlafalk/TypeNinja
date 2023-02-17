@@ -8,7 +8,7 @@ using API.Dtos;
 
 namespace API.Controllers;
 
-// [Authorize]
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 

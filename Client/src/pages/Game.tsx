@@ -68,6 +68,7 @@ export const Game = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
           },
         }
       );
@@ -178,7 +179,7 @@ const WordsContainer = styled.div`
   /* background-color: red; */
   outline: none;
   overflow: hidden;
-  max-height: 320px;
+  max-height: 450px;
   transition: all 0.25 ease 0s;
 `;
 
