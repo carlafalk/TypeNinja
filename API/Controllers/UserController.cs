@@ -1,37 +1,37 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using AppCore.Entities;
-using Microsoft.AspNetCore.Authorization;
+// using Microsoft.AspNetCore.Mvc;
+// using System.Linq;
+// using Microsoft.EntityFrameworkCore;
+// using AppCore.Entities;
+// using Microsoft.AspNetCore.Authorization;
 
-namespace API.Controllers;
+// namespace API.Controllers;
 
 
-[ApiController]
-[Route("[controller]")]
+// [ApiController]
+// [Route("[controller]")]
 
-public class UserController : ControllerBase
-{
-    private readonly Context context;
+// public class UserController : ControllerBase
+// {
+//     private readonly Context context;
 
-    public UserController(Context _context)
-    {
-        context = _context;
-    }
+//     public UserController(Context _context)
+//     {
+//         context = _context;
+//     }
 
-    [HttpPost]
-    public async Task<ActionResult<User>> PostUserAsync(User user)
-    {
-        context.UsersTEST.Add(user);
-        await context.SaveChangesAsync();
+//     [HttpPost]
+//     public async Task<ActionResult<User>> PostUserAsync(User user)
+//     {
+//         context.UsersTEST.Add(user);
+//         await context.SaveChangesAsync();
 
-        return Ok(user);
-    }
+//         return Ok(user);
+//     }
 
-    [HttpGet]
-    public async Task<ActionResult<User>> GetAllUsersAsync()
-    {
-        List<User> users = await context.UsersTEST.ToListAsync();
-        return Ok(users);
-    }
-}
+//     [HttpGet]
+//     public async Task<ActionResult<User>> GetAllUsersAsync()
+//     {
+//         List<User> users = await context.UsersTEST.ToListAsync();
+//         return Ok(users);
+//     }
+// }

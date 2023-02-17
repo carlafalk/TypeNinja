@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppCore.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221126110054_InitialModel")]
+    [Migration("20230131172848_InitialModel")]
     partial class InitialModel
     {
         /// <inheritdoc />
@@ -22,13 +22,14 @@ namespace AppCore.Data.Migrations
 
             modelBuilder.Entity("AppCore.Entities.Highscore", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<float>("Accuracy")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("WPM")
@@ -37,26 +38,6 @@ namespace AppCore.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Highscores");
-                });
-
-            modelBuilder.Entity("AppCore.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -54,29 +54,14 @@ namespace AppCore.Data.Migrations
                 name: "Highscores",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     WPM = table.Column<int>(type: "INTEGER", nullable: false),
                     Accuracy = table.Column<float>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Highscores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
-                    Password = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,9 +228,6 @@ namespace AppCore.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Highscores");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

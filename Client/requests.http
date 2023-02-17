@@ -16,19 +16,19 @@ GET http://localhost:5183/User
 
 POST https://localhost:7220/Highscore
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybGFmYWxrIiwianRpIjoiNmNmNjQ5OWItMjJmMS00MWE1LWE3MjQtODY1YTA0MDkxOTFhIiwiZXhwIjoxNjY5NDgxMjQ1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.xFf4cpuADBVUnK2dLvKTE1OYL9mRD_ujmLb7aJn4nKo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybGFmYWxrIiwianRpIjoiOTQ5NGJlYzktOTZiMS00MTdlLWI3ZTQtZDkxYWNmYWM3MTFmIiwiZXhwIjoxNjc1MjAzMDg2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TH2pjut2_xu3sBgY8EG44gKzjeipWjghwcr0N8VUeW0
 
 {
-    "Id": "2",
-    "UserId": "1",
+    "Id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "UserId": "4b15a579-5dab-4a4b-96d1-e51be121f807",
     "WPM": 50,
-    "Accuracy": 0.7
+    "Accuracy": 60
 }
 
 ###
 
 GET https://localhost:7220/Highscore
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiY2FybGFmYWxrIiwianRpIjoiNmNmNjQ5OWItMjJmMS00MWE1LWE3MjQtODY1YTA0MDkxOTFhIiwiZXhwIjoxNjY5NDgxMjQ1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.xFf4cpuADBVUnK2dLvKTE1OYL9mRD_ujmLb7aJn4nKo
+
 
 
 ###
@@ -48,6 +48,6 @@ POST https://localhost:7220/Authenticate/Login
 Content-Type: application/json
 
 {
-    "Username" : "carlafalk",
+    "Username" : "carl",
     "Password" : "test123!T"
 }

@@ -30,6 +30,7 @@ export const LoginForms = () => {
           if (response.status === 200) {
             setCurrentUser((prev) => ({
               ...prev,
+              id: response.data.id,
               username: response.data.username,
               token: response.data.token,
               isLoggedIn: true,
@@ -66,7 +67,7 @@ export const LoginForms = () => {
               }}
               variant="outlined"
               placeholder="Username"
-              sx={{ borderColor: "#000" }}
+              sx={{ color: "#fff" }}
             />
 
             <TextField
@@ -90,9 +91,8 @@ export const LoginForms = () => {
 };
 
 const ErrorMessage = styled(Typography)`
-  color: #1f0438;
-  background-color: #dec8e9;
+  color: #b70000;
+  background-color: #1c0202;
   padding: 5px 10px;
   border-radius: 10px;
-  font-size: 15px;
 `;

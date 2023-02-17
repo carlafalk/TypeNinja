@@ -19,6 +19,6 @@ export default MainContent;
 const MainStyled = styled.main`
   margin-top: 104px;
   height: calc(100vh - 104px);
-  margin-bottom: 6rem;
-  background-color: #92749c;
+  /* margin-bottom: 6rem; */
+  background-color: #282b30;
 `;

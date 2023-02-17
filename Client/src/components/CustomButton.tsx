@@ -17,10 +17,10 @@ export const CustomButton = ({ onClick, children }: CustomButtonProps) => {
 const MUIButton = styledMUI(Button)`
   width: 200px; 
   margin: 10px;
-  color: #bfa5d7;
-  background-color: #1f0438;
+  color: #e2b714;
+  background-color: #424549;
   border-radius: 5rem;
   &:hover {
-    background-color: #42136e;
+    background-color: #606060;
   }
 `;

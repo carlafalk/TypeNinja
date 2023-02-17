@@ -5,13 +5,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Saira Condensed', sans-serif !important;
 }
 
 body {
     overflow-x: hidden;
-    background-color: #92749c;
-    height: calc(100vh - 85px);
+    background-color: #282b30;
+    height: calc(100vh - 104px);
 }
 `;
 

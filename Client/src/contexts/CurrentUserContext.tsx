@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalstorage";
-import { CurrentUser } from "../models/CurrentUser";
+import { CurrentUser } from "../models/CurrentUserModel";
 
 interface CurrentUserContext {
   currentUser: CurrentUser;
@@ -8,7 +8,7 @@ interface CurrentUserContext {
 }
 
 const CurrentUserContext = createContext<CurrentUserContext>({
-  currentUser: { username: "", token: "", isLoggedIn: false },
+  currentUser: { id: "", username: "", token: "", isLoggedIn: false },
   setCurrentUser: () => {},
 });
 
@@ -18,6 +18,7 @@ interface CurrentUserProviderProps {
 
 const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
   const [currentUser, setCurrentUser] = useLocalStorage<CurrentUser>("currentUser", {
+    id: "",
     username: "",
     token: "",
     isLoggedIn: false,

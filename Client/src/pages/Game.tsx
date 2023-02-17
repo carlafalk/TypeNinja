@@ -1,10 +1,18 @@
 import { Typography } from "@mui/material";
 import { styled as styledMUI } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
+import words from "../assets/Words.json";
+import CountdownTimer from "../components/CountdownTimer";
 import MainContent from "../components/MainContent";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useGame } from "../contexts/GameContext";
+import { HighscoreModel } from "../models/HighscoreModel";
 import { buildArrayOfWordModel as buildWordModelArray } from "../Services/GameServices";
+import { axiosAPI } from "../utils/APIutils";
 
 type isCorrectType = "correct" | "incorrect" | "default";
 
@@ -15,25 +23,97 @@ export type wordModel = {
 export type letterModel = {
   isCorrect: isCorrectType;
   value: string;
+  active: boolean; // if the letter is active it should render an insertion point infront of the letter, which is removed when the letter is no longer active
+};
+
+export type row = {
+  words: wordModel[];
 };
 
 export const Game = () => {
   const [wordModelArray, setWordModelArray] = useState<wordModel[]>([]);
-  const { shuffledWordList, handleRestart, handleBackspace, handleSpace, handleDefaultKeyPress, points } = useGame();
+  const [restartGame, setRestartGame] = useState(false);
+  const [highscore, setHighscore] = useState<HighscoreModel>();
+  const { currentUser } = useCurrentUser();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const {
+    handleRestart,
+    handleBackspace,
+    handleSpace,
+    handleDefaultKeyPress,
+    timerStarted,
+    setTimerStarted,
+    secondsLeft,
+    WPM,
+    accuracy,
+    setWPM,
+    setAccuracy,
+    gameTime,
+    points,
+    keyPressCounter,
+    correctKeyPressedCounter,
+  } = useGame();
+
+  const { mutate: postHighscore } = useMutation(
+    ["highscore"],
+    async () => {
+      return await axiosAPI.post(
+        "/highscore",
+        {
+          id: uuidv4(),
+          userId: currentUser.id,
+          wpm: WPM,
+          accuracy: accuracy,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getHighscores"]);
+      },
+    }
+  );
 
   useEffect(() => {
-    const array: wordModel[] = buildWordModelArray(shuffledWordList);
+    const array: wordModel[] = buildWordModelArray(
+      words
+        .filter((word) => word.length > 2 && word.length < 8)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 100)
+    );
     setWordModelArray(array);
+  }, [restartGame]);
+
+  useEffect(() => {
+    const array: wordModel[] = buildWordModelArray(
+      words.sort(() => 0.5 - Math.random()).slice(0, 100)
+    );
+    setWordModelArray(array);
+    setTimerStarted(false);
+    handleRestart(array);
   }, []);
 
   useEffect(() => {
-    console.log(points);
-  }, [points]);
+    setAccuracy(Math.round((correctKeyPressedCounter / keyPressCounter) * 100));
+    setWPM((60 / gameTime) * points);
+
+    if (secondsLeft === 0) {
+      postHighscore();
+      navigate("score/");
+    }
+  }, [secondsLeft]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case "Tab": {
         handleRestart(wordModelArray);
+        setRestartGame((prev) => !prev);
         break;
       }
       case "Backspace": {
@@ -51,16 +131,17 @@ export const Game = () => {
       }
     }
   };
+  // console.log(timerStarted);
 
   return (
     <>
       <MainContent>
-        <Letter>{points}</Letter>
+        <CountdownTimer />
         <WordsContainer
           tabIndex={0}
           onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
             handleKeyPress(e);
-
+            e.key === "Tab" ? setTimerStarted(false) : setTimerStarted(true);
             e.preventDefault();
           }}
         >
@@ -68,15 +149,15 @@ export const Game = () => {
             <WordContainer key={"word " + index}>
               {word.letters.map((letter, index) =>
                 letter.isCorrect === "correct" ? (
-                  <Letter key={"letter " + index} style={{ color: "#2f00ae" }}>
+                  <Letter key={"letter " + index} style={{ color: "#a2a6ab" }}>
                     {letter.value}
                   </Letter>
                 ) : letter.isCorrect === "incorrect" ? (
-                  <Letter key={"letter " + index} style={{ color: "#8e1616" }}>
+                  <Letter key={"letter " + index} style={{ color: "#c6243f9e" }}>
                     {letter.value}
                   </Letter>
                 ) : (
-                  <Letter key={"letter " + index} style={{ color: "#0000005b" }}>
+                  <Letter key={"letter " + index} style={{ color: "#424549" }}>
                     {letter.value}
                   </Letter>
                 )
@@ -84,6 +165,12 @@ export const Game = () => {
             </WordContainer>
           ))}
         </WordsContainer>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {WPM}
+          {accuracy}
+          {gameTime}
+          {points}
+        </div>
       </MainContent>
     </>
   );
@@ -92,10 +179,11 @@ export const Game = () => {
 const WordsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 300px;
+  /* background-color: red; */
   outline: none;
   overflow: hidden;
-  max-height: 450px;
+  max-height: 320px;
+  transition: all 0.25 ease 0s;
 `;
 
 const WordContainer = styled.div`

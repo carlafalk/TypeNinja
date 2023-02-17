@@ -32,6 +32,7 @@ export const RegisterForm = () => {
           if (response.status == 200) {
             setCurrentUser((prev) => ({
               ...prev,
+              id: response.data.id,
               username: response.data.username,
               token: response.data.token,
               isLoggedIn: true,
@@ -47,6 +48,7 @@ export const RegisterForm = () => {
   return (
     <Formik
       initialValues={{
+        id: currentUser.id,
         username: "",
         email: "",
         password: "",

@@ -3,35 +3,76 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using AppCore.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using API.Dtos;
 
 namespace API.Controllers;
 
-[Authorize]
+// [Authorize]
 [ApiController]
 [Route("[controller]")]
 
 public class HighscoreController : ControllerBase
 {
-    private readonly Context context;
+    private readonly Context _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public HighscoreController(Context _context)
+    public HighscoreController(Context context, UserManager<IdentityUser> userManager)
     {
-        context = _context;
+        _context = context;
+        _userManager = userManager;
     }
 
     [HttpPost]
-    public async Task<ActionResult<Highscore>> PostHighscoreAsync(Highscore highscore)
+    public async Task<ActionResult<Highscore>> PostHighscoreAsync([FromBody] Highscore highscore)
     {
-        context.Highscores.Add(highscore);
-        await context.SaveChangesAsync();
+        try
+        {   
+        _context.Highscores.Add(highscore);
+        await _context.SaveChangesAsync();
+        }
+        catch (Exception exeption)
+        {
+            throw new Exception(exeption.Message);
+        }
 
-        return Ok(highscore);
+        return StatusCode(201, highscore);
     }
 
     [HttpGet]
-    public async Task<ActionResult<Highscore>> GetAllHighscoresAsync()
+    public async Task<ActionResult<List<HighscoreDto>>> GetAllHighscoresAsync()
     {
-        List<Highscore> persons = await context.Highscores.ToListAsync();
-        return Ok(persons);
+        List<HighscoreDto> highscores = new();
+        List<HighscoreDto> orderedHighscoreList = new();
+        var highscoreContext = await _context.Highscores.ToListAsync();
+        
+        try
+        {
+            foreach (var highscore in highscoreContext)
+            {
+                var user = await _userManager.FindByIdAsync(highscore.UserId.ToString());
+                if(user == null){
+                    Console.WriteLine("user not found");
+                }
+
+                HighscoreDto highscoreDto = new(){
+                    Id = highscore.Id,
+                    PlayerName = "carl",
+                    WPM = highscore.WPM,
+                    Accuracy = Math.Round(highscore.Accuracy)
+                };
+
+                highscores.Add(highscoreDto);
+            }
+            orderedHighscoreList.AddRange(highscores
+                                .OrderByDescending((higscore) => higscore.WPM)
+                                .ThenByDescending((highscore) => highscore.Accuracy)
+                                .ToList());
+        }
+        catch (Exception exeption)
+        {
+            throw new Exception(exeption.Message);
+        }
+        return Ok(orderedHighscoreList);
     }
 }
