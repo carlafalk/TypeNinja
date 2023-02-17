@@ -28,15 +28,23 @@ export const RegisterForm = () => {
           email: values.email,
           password: values.password,
         })
-        .then((response) => {
+        .then(async (response) => {
           if (response.status == 200) {
-            setCurrentUser((prev) => ({
-              ...prev,
-              id: response.data.id,
-              username: response.data.username,
-              token: response.data.token,
-              isLoggedIn: true,
-            }));
+            console.log("asdasd");
+            await axiosAPI
+              .post("Authenticate/Login", {
+                username: values.username,
+                password: values.password,
+              })
+              .then((response) => {
+                setCurrentUser((prev) => ({
+                  ...prev,
+                  id: response.data.id,
+                  username: response.data.username,
+                  token: response.data.token,
+                  isLoggedIn: true,
+                }));
+              });
           }
         });
     } catch (error) {

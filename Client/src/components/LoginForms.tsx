@@ -11,6 +11,7 @@ import { CustomButton } from "./CustomButton";
 export const LoginForms = () => {
   const { currentUser, setCurrentUser } = useCurrentUser();
   const [customError, setCustomError] = useState("");
+  const [registered, setRegistered] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export const LoginForms = () => {
       }}
       onSubmit={(values) => {
         SignIn(values);
+        setRegistered(true);
       }}
     >
       {({ handleChange, handleSubmit }) => {

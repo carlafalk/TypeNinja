@@ -14,7 +14,7 @@ export const Login = () => {
   return (
     <Container>
       <TitleContainer>
-        <Title>Keyboard Warrior</Title>
+        <Title>TypeNinja</Title>
         <KeyboardIcon sx={{ color: "#e2b714", position: "absolute", bottom: 38 }} />
       </TitleContainer>
       {showRegisterForm === false ? (

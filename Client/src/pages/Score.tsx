@@ -9,7 +9,8 @@ import { HighscoreModel } from "../models/HighscoreModel";
 import { axiosAPI } from "../utils/APIutils";
 
 const Score = () => {
-  const { WPM, accuracy, setSecondsLeft, gameTime } = useGame();
+  const { WPM, accuracy, setSecondsLeft, gameTime, keyPressCounter, correctKeyPressedCounter } =
+    useGame();
   const { data: highscores } = useQuery<HighscoreModel[]>(
     ["getHighscores"],
     async () => await (await axiosAPI.get("/highscore")).data
@@ -23,7 +24,7 @@ const Score = () => {
     <MainContent>
       <Container>
         <LeftContent>
-          <Typography style={{ fontSize: 50, color: "white" }}>SCORE</Typography>
+          <Typography style={{ fontSize: 50, color: "white" }}>STATS</Typography>
           <div style={{ display: "flex" }}>
             <Typography style={{ fontSize: 35, color: "white" }}>Accuracy:</Typography>
             <Typography
@@ -38,6 +39,14 @@ const Score = () => {
               style={{ fontSize: 35, color: "#e2b714", marginLeft: "auto", marginRight: "10rem" }}
             >
               {WPM}
+            </Typography>
+          </div>
+          <div style={{ display: "flex" }}>
+            <Typography style={{ fontSize: 35, color: "white" }}>Errors made:</Typography>
+            <Typography
+              style={{ fontSize: 35, color: "#e2b714", marginLeft: "auto", marginRight: "10rem" }}
+            >
+              {keyPressCounter - correctKeyPressedCounter}
             </Typography>
           </div>
         </LeftContent>

@@ -11,6 +11,8 @@ interface GameContext {
   secondsLeft: number;
   timerStarted: boolean;
   gameTime: number;
+  setCorrectKeyPressedCounter: React.Dispatch<React.SetStateAction<number>>;
+  setKeyPressCounter: React.Dispatch<React.SetStateAction<number>>;
   setGameTime: React.Dispatch<React.SetStateAction<number>>;
   setWPM: React.Dispatch<React.SetStateAction<number>>;
   setAccuracy: React.Dispatch<React.SetStateAction<number>>;
@@ -36,6 +38,8 @@ const GameContext = createContext<GameContext>({
   gameTime: 0,
   secondsLeft: 0,
   timerStarted: false,
+  setCorrectKeyPressedCounter: () => {},
+  setKeyPressCounter: () => {},
   setGameTime: () => {},
   setWPM: () => {},
   setAccuracy: () => {},
@@ -69,6 +73,8 @@ const GameProvider = ({ children }: GameProviderProps) => {
     array.forEach((word) => word.letters.forEach((letter) => (letter.isCorrect = "default")));
     setPoints(0);
     setSecondsLeft(gameTime);
+    setCorrectKeyPressedCounter(0);
+    setKeyPressCounter(0);
   };
 
   const handleBackspace = (array: wordModel[]) => {
@@ -96,7 +102,9 @@ const GameProvider = ({ children }: GameProviderProps) => {
     if (array[currentWordIndex].letters.length - 1 >= currentLetterIndex) {
       if (array[currentWordIndex].letters[currentLetterIndex].value === e.key) {
         array[currentWordIndex].letters[currentLetterIndex].isCorrect = "correct";
-        setCorrectKeyPressedCounter((prev) => prev + 1);
+        if (e.key !== " ") {
+          setCorrectKeyPressedCounter((prev) => prev + 1);
+        }
       } else array[currentWordIndex].letters[currentLetterIndex].isCorrect = "incorrect";
       setCurrentLetterIndex((prev) => prev + 1);
       setKeyPressCounter((prev) => prev + 1);
@@ -114,6 +122,8 @@ const GameProvider = ({ children }: GameProviderProps) => {
   return (
     <GameContext.Provider
       value={{
+        setCorrectKeyPressedCounter,
+        setKeyPressCounter,
         correctKeyPressedCounter,
         keyPressCounter,
         setAccuracy,

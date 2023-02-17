@@ -20,7 +20,7 @@ interface AppBarProps {}
 export const AppBar = () => {
   const { currentUser, setCurrentUser } = useCurrentUser();
   const navigate = useNavigate();
-  const { setWPM, setAccuracy } = useGame();
+  const { setWPM, setAccuracy, setCorrectKeyPressedCounter, setKeyPressCounter } = useGame();
 
   useEffect(() => {
     if (!currentUser.isLoggedIn) {
@@ -31,6 +31,8 @@ export const AppBar = () => {
   const returnToGameScreen = () => {
     setAccuracy(0);
     setWPM(0);
+    setCorrectKeyPressedCounter(0);
+    setKeyPressCounter(0);
     navigate("game/");
   };
 
@@ -50,7 +52,7 @@ export const AppBar = () => {
           <AppBarContainer maxWidth="lg">
             <LeftIconContainer onClick={() => returnToGameScreen()}>
               <Typography fontSize={40}>
-                TommysMamma
+                TypeNinja
                 <KeyboardHomeIcon style={{ fontSize: 20, color: "#e2b714" }} />
               </Typography>
             </LeftIconContainer>

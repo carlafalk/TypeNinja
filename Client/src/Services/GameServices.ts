@@ -13,6 +13,7 @@ export const buildArrayOfWordModel = (array: string[]): wordModel[] => {
       letterModelArray.push({
         value: letter,
         isCorrect: "default",
+        active: false,
       });
     });
     wordModelArray.push({

@@ -57,9 +57,9 @@ public class HighscoreController : ControllerBase
 
                 HighscoreDto highscoreDto = new(){
                     Id = highscore.Id,
-                    PlayerName = "carl",
+                    PlayerName = user.UserName,
                     WPM = highscore.WPM,
-                    Accuracy = Math.Round(highscore.Accuracy)
+                    Accuracy = highscore.Accuracy
                 };
 
                 highscores.Add(highscoreDto);

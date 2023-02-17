@@ -10,7 +10,6 @@ import CountdownTimer from "../components/CountdownTimer";
 import MainContent from "../components/MainContent";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useGame } from "../contexts/GameContext";
-import { HighscoreModel } from "../models/HighscoreModel";
 import { buildArrayOfWordModel as buildWordModelArray } from "../Services/GameServices";
 import { axiosAPI } from "../utils/APIutils";
 
@@ -33,7 +32,7 @@ export type row = {
 export const Game = () => {
   const [wordModelArray, setWordModelArray] = useState<wordModel[]>([]);
   const [restartGame, setRestartGame] = useState(false);
-  const [highscore, setHighscore] = useState<HighscoreModel>();
+  // const [highscore, setHighscore] = useState<HighscoreModel>();
   const { currentUser } = useCurrentUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -42,7 +41,7 @@ export const Game = () => {
     handleBackspace,
     handleSpace,
     handleDefaultKeyPress,
-    timerStarted,
+    // timerStarted,
     setTimerStarted,
     secondsLeft,
     WPM,
@@ -83,7 +82,7 @@ export const Game = () => {
   useEffect(() => {
     const array: wordModel[] = buildWordModelArray(
       words
-        .filter((word) => word.length > 2 && word.length < 8)
+        .filter((word) => word.length > 2 && word.length < 6)
         .sort(() => 0.5 - Math.random())
         .slice(0, 100)
     );
@@ -92,7 +91,10 @@ export const Game = () => {
 
   useEffect(() => {
     const array: wordModel[] = buildWordModelArray(
-      words.sort(() => 0.5 - Math.random()).slice(0, 100)
+      words
+        .filter((word) => word.length > 2 && word.length < 6)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 100)
     );
     setWordModelArray(array);
     setTimerStarted(false);
@@ -107,7 +109,7 @@ export const Game = () => {
       postHighscore();
       navigate("score/");
     }
-  }, [secondsLeft]);
+  }, [secondsLeft, points]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
@@ -165,12 +167,6 @@ export const Game = () => {
             </WordContainer>
           ))}
         </WordsContainer>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {WPM}
-          {accuracy}
-          {gameTime}
-          {points}
-        </div>
       </MainContent>
     </>
   );
