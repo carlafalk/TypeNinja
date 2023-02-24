@@ -13,9 +13,20 @@ public static class Dependencies
 {
     public static void ConfigServices(IConfiguration config, IServiceCollection services)
     {
+        //adding sqlite db 
         services.AddDbContext<Context>(c => c.UseSqlite(config.GetConnectionString("Db")));
 
-        services.AddIdentityCore<IdentityUser>()
+        services.AddIdentityCore<IdentityUser>(opt => 
+        {
+            //password settings 
+
+            opt.Password.RequireDigit = true;
+            opt.Password.RequiredLength = 6;
+            opt.Password.RequireNonAlphanumeric = false;
+            opt.Password.RequireUppercase = false;
+            opt.Password.RequireLowercase = false;
+            opt.Password.RequiredUniqueChars = 1;
+        })
         .AddEntityFrameworkStores<Context>()
         .AddDefaultTokenProviders();
         services.AddCors(options => options.AddDefaultPolicy(builder => builder.WithOrigins("http://127.0.0.1:5173").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));

@@ -99,6 +99,7 @@ export const RegisterForm = () => {
               variant="outlined"
               placeholder="Password"
             />
+            {errors.password}
 
             <CustomButton onClick={() => handleSubmit()}>Register</CustomButton>
           </>

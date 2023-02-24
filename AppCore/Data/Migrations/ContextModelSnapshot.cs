@@ -23,8 +23,8 @@ namespace AppCore.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Accuracy")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Accuracy")
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");

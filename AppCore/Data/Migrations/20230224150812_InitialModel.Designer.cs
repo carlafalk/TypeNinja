@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppCore.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230131172848_InitialModel")]
+    [Migration("20230224150812_InitialModel")]
     partial class InitialModel
     {
         /// <inheritdoc />
@@ -26,8 +26,8 @@ namespace AppCore.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Accuracy")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Accuracy")
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");

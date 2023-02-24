@@ -57,7 +57,7 @@ namespace AppCore.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     WPM = table.Column<int>(type: "INTEGER", nullable: false),
-                    Accuracy = table.Column<float>(type: "REAL", nullable: false)
+                    Accuracy = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
