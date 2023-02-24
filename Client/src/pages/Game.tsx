@@ -22,7 +22,7 @@ export type wordModel = {
 export type letterModel = {
   isCorrect: isCorrectType;
   value: string;
-  active: boolean; // if the letter is active it should render an insertion point infront of the letter, which is removed when the letter is no longer active
+  // active: boolean;
 };
 
 export type row = {
@@ -32,7 +32,7 @@ export type row = {
 export const Game = () => {
   const [wordModelArray, setWordModelArray] = useState<wordModel[]>([]);
   const [restartGame, setRestartGame] = useState(false);
-  // const [highscore, setHighscore] = useState<HighscoreModel>();
+
   const { currentUser } = useCurrentUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const Game = () => {
     handleBackspace,
     handleSpace,
     handleDefaultKeyPress,
-    // timerStarted,
+
     setTimerStarted,
     secondsLeft,
     WPM,

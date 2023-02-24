@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import styled from "styled-components";
 import HighscoreCard from "../components/HighscoreCard";
 import MainContent from "../components/MainContent";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useGame } from "../contexts/GameContext";
 import { HighscoreModel } from "../models/HighscoreModel";
 import { axiosAPI } from "../utils/APIutils";
@@ -11,9 +12,20 @@ import { axiosAPI } from "../utils/APIutils";
 const Score = () => {
   const { WPM, accuracy, setSecondsLeft, gameTime, keyPressCounter, correctKeyPressedCounter } =
     useGame();
+
+  const { currentUser } = useCurrentUser();
+
   const { data: highscores } = useQuery<HighscoreModel[]>(
     ["getHighscores"],
-    async () => await (await axiosAPI.get("/highscore")).data
+    async () =>
+      await (
+        await axiosAPI.get("/highscore", {
+          headers: { Authorization: `Bearer ${currentUser.token}` },
+        })
+      ).data,
+    {
+      refetchOnMount: true,
+    }
   );
 
   useEffect(() => {
@@ -94,7 +106,6 @@ const Container = styled.div`
 
 const LeftContent = styled.div`
   margin-top: 5rem;
-  /* background-color: red; */
   width: 55%;
 `;
 

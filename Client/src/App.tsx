@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 import Layout from "./Layout";
@@ -24,6 +25,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   );
