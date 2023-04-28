@@ -1,13 +1,14 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Route, Routes } from "react-router-dom";
-import GlobalStyle from "./globalStyles";
 import Layout from "./Layout";
+import GlobalStyle from "./globalStyles";
 import { Game } from "./pages/Game";
 import { Highscore } from "./pages/Highscore";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import Score from "./pages/Score";
+import "./styles/style.css";
 
 const queryClient = new QueryClient();
 function App() {

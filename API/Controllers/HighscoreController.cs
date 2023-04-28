@@ -56,6 +56,7 @@ public class HighscoreController : ControllerBase
                 }
 
                 HighscoreDto highscoreDto = new(){
+                    UserId = user.Id,
                     Id = highscore.Id,
                     PlayerName = user.UserName,
                     WPM = highscore.WPM,

@@ -3,6 +3,8 @@ import words from "../assets/Words.json";
 import { letterModel, wordModel } from "../pages/Game";
 
 interface GameContext {
+  currentWordIndex: number;
+  currentLetterIndex: number;
   WPM: number;
   correctKeyPressedCounter: number;
   keyPressCounter: number;
@@ -30,6 +32,8 @@ interface GameProviderProps {
 }
 
 const GameContext = createContext<GameContext>({
+  currentWordIndex: 0,
+  currentLetterIndex: 0,
   WPM: 0,
   keyPressCounter: 0,
   correctKeyPressedCounter: 0,
@@ -77,16 +81,33 @@ const GameProvider = ({ children }: GameProviderProps) => {
     setKeyPressCounter(0);
   };
 
+  // const handleBackspace = (array: wordModel[]) => {
+  //   if (currentLetterIndex > 0) {
+  //     setCurrentLetterIndex((prev) => prev - 1);
+  //     array[currentWordIndex].letters[currentLetterIndex - 1].isCorrect = "default";
+  //   } else if (currentLetterIndex === 0 && currentWordIndex > 0) {
+  //     setCurrentWordIndex((prev) => prev - 1);
+  //     setCurrentLetterIndex(array[currentWordIndex - 1].letters.length);
+  //   } else if (currentLetterIndex < 0 && currentWordIndex <= 0) {
+  //     setCurrentLetterIndex(0);
+  //     array[currentWordIndex].letters[currentLetterIndex - 1].isCorrect = "default";
+  //   }
+  // };
+
   const handleBackspace = (array: wordModel[]) => {
-    if (currentLetterIndex > 0) {
-      setCurrentLetterIndex((prev) => prev - 1);
-      array[currentWordIndex].letters[currentLetterIndex - 1].isCorrect = "default";
-    } else if (currentLetterIndex === 0 && currentWordIndex > 0) {
-      setCurrentWordIndex((prev) => prev - 1);
-      setCurrentLetterIndex(array[currentWordIndex - 1].letters.length);
-    } else if (currentLetterIndex < 0 && currentWordIndex <= 0) {
-      setCurrentLetterIndex(0);
-      array[currentWordIndex].letters[currentLetterIndex - 1].isCorrect = "default";
+    switch (true) {
+      case currentLetterIndex > 0:
+        setCurrentLetterIndex((prev) => prev - 1);
+        array[currentWordIndex].letters[currentLetterIndex - 1].isCorrect = "default";
+        break;
+      case currentLetterIndex === 0 && currentWordIndex > 0:
+        const prevWord = array[currentWordIndex - 1];
+        setCurrentWordIndex((prev) => prev - 1);
+        setCurrentLetterIndex(prevWord.letters.length);
+        break;
+      default:
+        setCurrentLetterIndex(0);
+        array[currentWordIndex].letters[currentLetterIndex - 1].isCorrect = "default";
     }
   };
 
@@ -106,6 +127,7 @@ const GameProvider = ({ children }: GameProviderProps) => {
           setCorrectKeyPressedCounter((prev) => prev + 1);
         }
       } else array[currentWordIndex].letters[currentLetterIndex].isCorrect = "incorrect";
+      array[currentWordIndex].letters[currentLetterIndex].active;
       setCurrentLetterIndex((prev) => prev + 1);
       setKeyPressCounter((prev) => prev + 1);
     }
@@ -122,6 +144,8 @@ const GameProvider = ({ children }: GameProviderProps) => {
   return (
     <GameContext.Provider
       value={{
+        currentWordIndex,
+        currentLetterIndex,
         setCorrectKeyPressedCounter,
         setKeyPressCounter,
         correctKeyPressedCounter,

@@ -1,4 +1,4 @@
-import { TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -61,27 +61,23 @@ export const LoginForms = () => {
       {({ handleChange, handleSubmit }) => {
         return (
           <>
-            <TextField
+            <LoginInputField
               id="username"
               onChange={(e) => {
                 handleChange(e);
                 setCustomError("");
               }}
-              variant="outlined"
               placeholder="Username"
-              sx={{ color: "#fff" }}
             />
 
-            <TextField
+            <LoginInputField
               id="password"
               onChange={(e) => {
                 handleChange(e);
                 setCustomError("");
               }}
-              variant="outlined"
               placeholder="Password"
               type="password"
-              sx={{ margin: 1 }}
             />
             {customError.length > 0 && <ErrorMessage>{customError}</ErrorMessage>}
             <CustomButton onClick={() => handleSubmit()}>Sign in</CustomButton>
@@ -97,4 +93,18 @@ const ErrorMessage = styled(Typography)`
   background-color: #1c0202;
   padding: 5px 10px;
   border-radius: 10px;
+`;
+
+const LoginInputField = styled.input`
+  border: 1px solid #424549;
+  padding: 10px;
+  border-radius: 7px;
+  background-color: #424549;
+  color: white;
+  margin-bottom: 5px;
+
+  ::placeholder {
+    color: white;
+    opacity: 0.6;
+  }
 `;

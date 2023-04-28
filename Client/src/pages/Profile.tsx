@@ -2,13 +2,23 @@ import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import HighscoreCard from "../components/HighscoreCard";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { HighscoreModel } from "../models/HighscoreModel";
 import { axiosAPI } from "../utils/APIutils";
 
 export const Profile = () => {
+  const { currentUser } = useCurrentUser();
   const { data: highscores } = useQuery<HighscoreModel[]>(
     ["getHighscores"],
-    async () => await (await axiosAPI.get("/highscore")).data
+    async () =>
+      await (
+        await axiosAPI.get("/highscore", {
+          headers: { Authorization: `Bearer ${currentUser.token}` },
+        })
+      ).data,
+    {
+      refetchOnMount: true,
+    }
   );
   return (
     <RightContent>
@@ -19,7 +29,30 @@ export const Profile = () => {
         <Typography style={{ color: "white" }}>WPM</Typography>
         <Typography style={{ color: "white", marginLeft: "4rem" }}>ACC</Typography>
       </WPMAndAccContainer>
-      {highscores?.map((highscore, index) =>
+      {highscores
+        ?.filter((x) => x.userId == currentUser.id)
+        .map((highscore, index) =>
+          (index + 1) % 2 === 0 ? (
+            <HighscoreCard
+              key={index}
+              color=""
+              wpm={highscore.wpm}
+              accuracy={highscore.accuracy}
+              index={index}
+              playerName={highscore.playerName}
+            />
+          ) : (
+            <HighscoreCard
+              key={index}
+              color="#3a3c3e"
+              wpm={highscore.wpm}
+              accuracy={highscore.accuracy}
+              index={index}
+              playerName={highscore.playerName}
+            />
+          )
+        )}
+      {/* {highscores?.map((highscore, index) =>
         (index + 1) % 2 === 0 ? (
           <HighscoreCard
             color=""
@@ -37,7 +70,7 @@ export const Profile = () => {
             playerName={highscore.playerName}
           />
         )
-      )}
+      )} */}
     </RightContent>
   );
 };
