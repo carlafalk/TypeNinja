@@ -4,7 +4,7 @@
 
 .border-pulse {
   border-left: 2px solid #e2b714;
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse 1s ease-in-out infinite;
 }
 .invisible-border {
   border-left: 2px solid #00000000;

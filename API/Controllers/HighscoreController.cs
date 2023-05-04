@@ -5,6 +5,7 @@ using AppCore.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using API.Dtos;
+using AppCore.Infrastructure;
 
 namespace API.Controllers;
 
@@ -56,9 +57,9 @@ public class HighscoreController : ControllerBase
                 }
 
                 HighscoreDto highscoreDto = new(){
-                    UserId = user.Id,
+                    UserId = user?.Id,
                     Id = highscore.Id,
-                    PlayerName = user.UserName,
+                    PlayerName = user?.UserName,
                     WPM = highscore.WPM,
                     Accuracy = highscore.Accuracy
                 };

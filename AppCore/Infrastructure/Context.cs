@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using AppCore.Entities;
 
-namespace AppCore.Entities;
+namespace AppCore.Infrastructure;
 
 public class Context : IdentityDbContext<IdentityUser>
 {
     public DbSet<Highscore> Highscores {get; set;}
-    // public DbSet<User> UsersTEST { get; set; }
 
     public Context(DbContextOptions<Context> options) : base(options)
     {
