@@ -1,4 +1,4 @@
-# KeyboardWarrior
+# TypeNinja
 
 kravlista
 [x] hämta hem en lista med random ord
