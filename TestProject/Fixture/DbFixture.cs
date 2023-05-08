@@ -1,4 +1,5 @@
 using AppCore.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,8 @@ namespace Test;
 public class DbFixture : IDisposable
 {
     private const string InMemoryConnectionString = "Data Source=Db.sqlite";
-    public Context context { get; set; }
+    public Context _context;
+    public UserManager<IdentityUser> userManager;
     private readonly SqliteConnection _connection;
     public DbFixture()
     {
@@ -16,12 +18,13 @@ public class DbFixture : IDisposable
         var options = new DbContextOptionsBuilder<Context>()
                 .UseSqlite(_connection)
                 .Options;
-        context = new Context(options);
-        context.Database.EnsureCreated();
+        _context = new Context(options);
+        _context.Database.EnsureCreated();
     }
 
     public void Dispose()
     {
         _connection.Close();
+        _context.Dispose();
     }
 }
