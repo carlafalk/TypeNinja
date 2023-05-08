@@ -12,7 +12,7 @@ export const Profile = () => {
     ["getHighscores"],
     async () =>
       await (
-        await axiosAPI.get("/highscore", {
+        await axiosAPI.get("highscore", {
           headers: { Authorization: `Bearer ${currentUser.token}` },
         })
       ).data,

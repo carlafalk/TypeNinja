@@ -39,7 +39,7 @@ public static class Dependencies
         })
         .AddEntityFrameworkStores<Context>()
         .AddDefaultTokenProviders();
-        services.AddCors(options => options.AddDefaultPolicy(builder => builder.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+        services.AddCors(options => options.AddDefaultPolicy(builder => builder.WithOrigins("http://127.0.0.1:5173").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 
         services.AddAuthentication(options => {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

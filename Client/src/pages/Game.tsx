@@ -68,7 +68,7 @@ export const Game = () => {
     ["highscore"],
     async () => {
       return await axiosAPI.post(
-        "/highscore",
+        "highscore",
         {
           id: uuidv4(),
           userId: currentUser.id,
