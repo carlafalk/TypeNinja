@@ -1,8 +1,9 @@
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { styled as styledMUI } from "@mui/material/styles";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { RegisterModel } from "../models/RegisterModel";
 import { axiosAPI } from "../utils/APIutils";
@@ -69,34 +70,30 @@ export const RegisterForm = () => {
       {({ handleChange, handleSubmit, errors }) => {
         return (
           <>
-            <TextField
+            <RegisterInput
               id="username"
               onChange={(e) => {
                 handleChange(e);
               }}
-              variant="outlined"
               placeholder="Username"
             />
             {errors.username}
 
-            <TextField
+            <RegisterInput
               id="email"
               onChange={(e) => {
                 handleChange(e);
               }}
-              variant="outlined"
               placeholder="Email"
-              sx={{ margin: 1 }}
             />
             {errors.email}
 
-            <TextField
+            <RegisterInput
               id="password"
               onChange={(e) => {
                 handleChange(e);
               }}
               type="password"
-              variant="outlined"
               placeholder="Password"
             />
             {errors.password}
@@ -117,5 +114,19 @@ const MUIButton = styledMUI(Button)`
   border-radius: 5rem;
   &:hover {
     background-color: #42136e;
+  }
+`;
+
+const RegisterInput = styled.input`
+  border: 1px solid #424549;
+  padding: 10px;
+  border-radius: 7px;
+  background-color: #424549;
+  color: white;
+  margin-bottom: 5px;
+
+  ::placeholder {
+    color: white;
+    opacity: 0.6;
   }
 `;

@@ -9,10 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Dependencies.ConfigServices(builder.Configuration, builder.Services);
-
 //adding sqlite db 
-
 builder.Services.AddDbContext<Context>(c => c.UseSqlite(builder.Configuration.GetConnectionString("Db")));
 
 var test = Directory.GetCurrentDirectory();
