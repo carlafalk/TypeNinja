@@ -13,6 +13,7 @@ import MainContent from "../components/MainContent";
 import WordsContainer from "../components/WordsContainer";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useGame } from "../contexts/GameContext";
+import { HighscoreModel } from "../models/HighscoreModel";
 import { axiosAPI } from "../utils/APIutils";
 
 type isCorrectType = "correct" | "incorrect" | "default";
@@ -74,7 +75,8 @@ export const Game = () => {
           userId: currentUser.id,
           wpm: WPM,
           accuracy: accuracy,
-        },
+          username: currentUser.username,
+        } as HighscoreModel,
         {
           headers: {
             "Content-Type": "application/json",

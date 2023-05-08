@@ -1,7 +1,7 @@
 export interface HighscoreModel {
   userId: string;
   id: string;
-  playerName: string;
+  username: string;
   wpm: number;
   accuracy: number;
 }

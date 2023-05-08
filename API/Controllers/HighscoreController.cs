@@ -51,15 +51,9 @@ public class HighscoreController : ControllerBase
         {
             foreach (var highscore in highscoreContext)
             {
-                var user = await _userManager.FindByIdAsync(highscore.UserId.ToString());
-                if(user == null){
-                    Console.WriteLine("user not found");
-                }
-
                 HighscoreDto highscoreDto = new(){
-                    UserId = user?.Id,
-                    Id = highscore.Id,
-                    PlayerName = user?.UserName,
+                    UserId = highscore.UserId.ToString(),
+                    Username = highscore.Username,
                     WPM = highscore.WPM,
                     Accuracy = highscore.Accuracy
                 };

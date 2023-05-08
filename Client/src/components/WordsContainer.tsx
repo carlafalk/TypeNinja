@@ -57,8 +57,8 @@ const WordsContainer = ({
           </WordContainer>
         ))} */}
         {wordModelArray.map((word, index2) => (
-          <>
-            <WordContainer key={"word " + index2}>
+          <InnerContainer key={index2}>
+            <WordContainer>
               {word.letters.map((letter, index) =>
                 letter.isCorrect === "correct" ? (
                   <Letter
@@ -101,7 +101,7 @@ const WordsContainer = ({
               }
               style={{ width: "8px" }}
             ></div>
-          </>
+          </InnerContainer>
         ))}
       </StyledWordsContainer>
       {!focus && <FocusText>press to focus</FocusText>}
@@ -126,6 +126,12 @@ const WordContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const OuterContainer = styled.div`
   position: relative;
 `;

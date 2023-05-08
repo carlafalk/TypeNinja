@@ -35,8 +35,7 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>, I
 
         httpClient = factory.CreateClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CreateMockToken());
-        dbFixture = _context;
-        dbFixture.userManager = MockUserManager<IdentityUser>(_users).Object;        
+        dbFixture = _context;      
     }
     
 
@@ -47,23 +46,29 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>, I
         var httpResponseMessage = await httpClient.GetAsync("Highscore");
         var responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
         var nrOfHighscores = JsonSerializer.Deserialize<List<HighscoreDto>>(responseBody);
-
-        // ACT
         var highScoreToInsert = new Highscore(){
             WPM = 30,
             Accuracy = 0.98m,
-            Id = Guid.NewGuid()
+            Id = Guid.NewGuid(),
+            UserId = Guid.NewGuid(),
+            Username = "Carl"
         };
+
+        // ACT
         var insertedHighscore = dbFixture._context.Highscores.Add(highScoreToInsert).Entity;
         await dbFixture._context.SaveChangesAsync();
 
         httpResponseMessage = await httpClient.GetAsync("Highscore");
         responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
-        var nrOfHighscoresAfterInsert = JsonSerializer.Deserialize<List<HighscoreDto>>(responseBody, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+        var nrOfHighscoresAfterInsert = JsonSerializer.Deserialize<List<HighscoreDto>>(responseBody)!;
+
+        // var test = dbFixture._context.Highscores.ToList();
+        // var count = test.Count();
 
         // ASSERT
         nrOfHighscores.Count.Should().Be(nrOfHighscoresAfterInsert.Count - 1);
         httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
+        // nrOfHighscoresAfterInsert.Count.Should().Be(1);
 
         // CLEAN UP
         dbFixture._context.Highscores.Remove(insertedHighscore);
@@ -79,7 +84,9 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>, I
         var highScoreToInsert = new Highscore(){
             WPM = 30,
             Accuracy = 0.98m,
-            Id = id
+            Id = id,
+            Username = "Carl",
+            UserId = Guid.NewGuid()
         };
     
         //ACT
@@ -105,7 +112,7 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>, I
     [Fact]
     public async Task TestNameAsync()
     {
-        var test = await dbFixture.userManager.FindByNameAsync("user1");
+        
     
         // When
     

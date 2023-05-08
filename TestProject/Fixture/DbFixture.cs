@@ -9,7 +9,6 @@ public class DbFixture : IDisposable
 {
     private const string InMemoryConnectionString = "Data Source=Db.sqlite";
     public Context _context;
-    public UserManager<IdentityUser> userManager;
     private readonly SqliteConnection _connection;
     public DbFixture()
     {
@@ -25,6 +24,5 @@ public class DbFixture : IDisposable
     public void Dispose()
     {
         _connection.Close();
-        _context.Dispose();
     }
 }

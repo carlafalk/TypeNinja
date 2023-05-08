@@ -40,7 +40,7 @@ export const Profile = () => {
                 wpm={highscore.wpm}
                 accuracy={highscore.accuracy}
                 index={index}
-                playerName={highscore.playerName}
+                username={highscore.username}
               />
             ) : (
               <HighscoreCard
@@ -49,7 +49,7 @@ export const Profile = () => {
                 wpm={highscore.wpm}
                 accuracy={highscore.accuracy}
                 index={index}
-                playerName={highscore.playerName}
+                username={highscore.username}
               />
             )
           )}

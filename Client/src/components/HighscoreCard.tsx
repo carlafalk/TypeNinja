@@ -5,16 +5,16 @@ interface Props {
   color: string;
   wpm: number;
   accuracy: number;
-  playerName: string;
+  username: string;
   index: number;
 }
 
-const HighscoreCard = ({ color, wpm, accuracy, playerName, index }: Props) => {
+const HighscoreCard = ({ color, wpm, accuracy, username, index }: Props) => {
   return (
     <HighscoreCardContainer style={{ backgroundColor: color }}>
       <IndexAndNameContainer>
         <WhiteText style={{ marginRight: "1rem", marginLeft: "1rem" }}>{index + 1} </WhiteText>
-        <WhiteText>{playerName}</WhiteText>
+        <WhiteText>{username}</WhiteText>
       </IndexAndNameContainer>
       <ScoreContainer>
         <Scores>{wpm}</Scores>

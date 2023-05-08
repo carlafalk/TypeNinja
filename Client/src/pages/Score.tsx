@@ -29,6 +29,7 @@ const Score = () => {
   );
 
   useEffect(() => {
+    console.log(highscores![0].username);
     setSecondsLeft(gameTime);
   }, []);
 
@@ -74,19 +75,21 @@ const Score = () => {
           {highscores?.map((highscore, index) =>
             (index + 1) % 2 === 0 ? (
               <HighscoreCard
+                key={index}
                 color=""
                 wpm={highscore.wpm}
                 accuracy={highscore.accuracy}
                 index={index}
-                playerName={highscore.playerName}
+                username={highscore.username}
               />
             ) : (
               <HighscoreCard
+                key={index}
                 color="#3a3c3e"
                 wpm={highscore.wpm}
                 accuracy={highscore.accuracy}
                 index={index}
-                playerName={highscore.playerName}
+                username={highscore.username}
               />
             )
           )}
