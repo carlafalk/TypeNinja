@@ -15,7 +15,7 @@ kravlista
 Highscores
 [ ] ta bort alla highscores
 [x] presentera alla highscores
-[ ] presentera alla highscores för den inloggade användare
+[x] presentera alla highscores för den inloggade användare
 
 score
 [x] se antalet ord per minut
@@ -26,6 +26,7 @@ användare
 [x] registrera sig
 [x] logga in
 [x] spara användare i databas
+[ ] ändra användarnamn och lösenord
 
 // "http": {
 "commandName": "Project",
