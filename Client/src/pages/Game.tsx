@@ -1,5 +1,6 @@
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import { Typography } from "@mui/material";
+import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,13 @@ import { useGame } from "../contexts/GameContext";
 import { axiosAPI } from "../utils/APIutils";
 
 type isCorrectType = "correct" | "incorrect" | "default";
+
+type decodedToken = {
+  exp: number;
+  jti: string;
+  iss: string;
+  aud: string;
+};
 
 export type wordModel = {
   letters: letterModel[];
@@ -34,7 +42,7 @@ export const Game = () => {
   const [wordModelArray, setWordModelArray] = useState<wordModel[]>([]);
   const [restartGame, setRestartGame] = useState(false);
   const [focus, setFocus] = useState(false);
-  const { currentUser } = useCurrentUser();
+  const { currentUser, setCurrentUser } = useCurrentUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const {
@@ -91,6 +99,19 @@ export const Game = () => {
     );
     setWordModelArray(array);
   }, [restartGame]);
+
+  //LOG OUT USER IF TOKEN IS EXPIRED
+  useEffect(() => {
+    const decoded = jwtDecode<decodedToken>(currentUser.token);
+    if (decoded.exp < Date.now() / 1000) {
+      setCurrentUser({
+        id: "",
+        username: "",
+        token: "",
+        isLoggedIn: false,
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const array: wordModel[] = buildWordModelArray(
