@@ -17,6 +17,15 @@ public static class Dependencies
         //adding sqlite db 
         services.AddDbContext<Context>(c => c.UseSqlite(config.GetConnectionString("Db")));
 
+        var test = Directory.GetCurrentDirectory();
+        var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+        var dotenvPath = Path.Combine(directory.Parent.FullName, ".env");
+        DotEnv.Load("C:\\skola\\TypeNinja\\.env");
+        // DotEnv.Load(dotenvPath);
+        
+
+        var configBuilder = new ConfigurationBuilder().AddEnvironmentVariables().Build();
+
         services.AddIdentityCore<IdentityUser>(opt => 
         {
             //password settings 
