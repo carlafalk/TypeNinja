@@ -62,9 +62,6 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>, I
         responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
         var nrOfHighscoresAfterInsert = JsonSerializer.Deserialize<List<HighscoreDto>>(responseBody)!;
 
-        // var test = dbFixture._context.Highscores.ToList();
-        // var count = test.Count();
-
         // ASSERT
         nrOfHighscores.Count.Should().Be(nrOfHighscoresAfterInsert.Count - 1);
         httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
