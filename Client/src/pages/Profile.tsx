@@ -23,12 +23,12 @@ export const Profile = () => {
   return (
     <Container>
       <Content>
-        <Typography style={{ fontSize: 50, textAlign: "center", color: "white" }}>
+        <Typography style={{ fontSize: 50, textAlign: "center", color: "#e7eae0" }}>
           {`${currentUser.username}'s`.toUpperCase()} HIGHSCORES
         </Typography>
         <WPMAndAccContainer>
-          <Typography style={{ color: "white" }}>WPM</Typography>
-          <Typography style={{ color: "white", marginLeft: "4rem" }}>ACC</Typography>
+          <Typography style={{ color: "#e7eae0" }}>WPM</Typography>
+          <Typography style={{ color: "#e7eae0", marginLeft: "4rem" }}>ACC</Typography>
         </WPMAndAccContainer>
         {highscores
           ?.filter((x) => x.userId == currentUser.id)
@@ -45,7 +45,7 @@ export const Profile = () => {
             ) : (
               <HighscoreCard
                 key={index}
-                color="#3a3c3e"
+                color="#48494b"
                 wpm={highscore.wpm}
                 accuracy={highscore.accuracy}
                 index={index}
@@ -78,7 +78,7 @@ export const Profile = () => {
 };
 
 const Content = styled.div`
-  background-color: #323334;
+  background-color: #191a1b;
   padding: 2rem;
   margin-top: 5rem;
   overflow: scroll;

@@ -1,5 +1,3 @@
-import { Button } from "@mui/material";
-import { styled as styledMUI } from "@mui/material/styles";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -106,27 +104,27 @@ export const RegisterForm = () => {
   );
 };
 
-const MUIButton = styledMUI(Button)`
-  width: 200px;
-  margin: 10px;
-  color: #bfa5d7;
-  background-color: #1f0438;
-  border-radius: 5rem;
-  &:hover {
-    background-color: #42136e;
-  }
-`;
+// const MUIButton = styledMUI(Button)`
+//   width: 200px;
+//   margin: 10px;
+//   color: #bfa5d7;
+//   background-color: #1f0438;
+//   border-radius: 5rem;
+//   &:hover {
+//     background-color: #42136e;
+//   }
+// `;
 
 const RegisterInput = styled.input`
   border: 1px solid #424549;
   padding: 10px;
   border-radius: 7px;
   background-color: #424549;
-  color: white;
+  color: #e7eae0;
   margin-bottom: 5px;
 
   ::placeholder {
-    color: white;
+    color: #e7eae0;
     opacity: 0.6;
   }
 `;

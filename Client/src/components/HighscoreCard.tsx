@@ -19,7 +19,7 @@ const HighscoreCard = ({ color, wpm, accuracy, username, index }: Props) => {
       <ScoreContainer>
         <Scores>{wpm}</Scores>
         <Scores>{accuracy}</Scores>
-        <Typography style={{ color: "#e2b714", marginTop: 25 }}>%</Typography>
+        <Typography style={{ color: "#79a617", marginTop: 25 }}>%</Typography>
       </ScoreContainer>
     </HighscoreCardContainer>
   );
@@ -43,11 +43,11 @@ const ScoreContainer = styled.div`
 
 const WhiteText = styled(Typography)`
   font-size: 2.5rem !important;
-  color: white;
+  color: #e7eae0;
 `;
 
 const Scores = styled(Typography)`
   font-size: 2.5rem !important;
-  color: #e2b714;
+  color: #79a617;
   margin-left: 3rem !important;
 `;

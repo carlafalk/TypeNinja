@@ -56,16 +56,16 @@ const StyledLetter = styledMUI(
     ...props
   }: StyledTextProps & React.ComponentProps<typeof Typography>) => <Typography {...props} />
 )<StyledTextProps>`
-font-family: "Saira Condensed";
+font-family: "Saira Condensed" !important;
 font-size: 30px;
 flex-direction: row;
   color: ${(props) => {
     if (props.correct) {
-      return "#a2a6ab";
+      return "#e7eae0";
     } else if (props.default2) {
-      return "#424549";
+      return "#48494b";
     } else if (props.incorrect) {
-      return "#c6243f9e";
+      return "#a61717a7";
     }
   }};
 `;

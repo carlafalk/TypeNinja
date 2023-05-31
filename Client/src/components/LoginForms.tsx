@@ -89,7 +89,7 @@ export const LoginForms = () => {
 };
 
 const ErrorMessage = styled(Typography)`
-  color: #b70000;
+  color: #a61717;
   background-color: #1c0202;
   padding: 5px 10px;
   border-radius: 10px;
@@ -100,11 +100,11 @@ const LoginInputField = styled.input`
   padding: 10px;
   border-radius: 7px;
   background-color: #424549;
-  color: white;
+  color: #e7eae0;
   margin-bottom: 5px;
 
   ::placeholder {
-    color: white;
+    color: #e7eae0;
     opacity: 0.6;
   }
 `;

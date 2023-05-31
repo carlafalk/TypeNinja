@@ -29,7 +29,7 @@ const Score = () => {
   );
 
   useEffect(() => {
-    console.log(highscores![0].username);
+    // console.log(highscores![0].username);
     setSecondsLeft(gameTime);
   }, []);
 
@@ -37,27 +37,27 @@ const Score = () => {
     <MainContent>
       <Container>
         <LeftContent>
-          <Typography style={{ fontSize: 50, color: "white" }}>STATS</Typography>
+          <Typography style={{ fontSize: 50, color: "#e7eae0" }}>STATS</Typography>
           <div style={{ display: "flex" }}>
-            <Typography style={{ fontSize: 35, color: "white" }}>Accuracy:</Typography>
+            <Typography style={{ fontSize: 35, color: "#e7eae0" }}>Accuracy:</Typography>
             <Typography
-              style={{ fontSize: 35, color: "#e2b714", marginLeft: "auto", marginRight: "10rem" }}
+              style={{ fontSize: 35, color: "#79a617", marginLeft: "auto", marginRight: "10rem" }}
             >
               {accuracy}%
             </Typography>
           </div>
           <div style={{ display: "flex" }}>
-            <Typography style={{ fontSize: 35, color: "white" }}>Words Per Minute:</Typography>
+            <Typography style={{ fontSize: 35, color: "#e7eae0" }}>Words Per Minute:</Typography>
             <Typography
-              style={{ fontSize: 35, color: "#e2b714", marginLeft: "auto", marginRight: "10rem" }}
+              style={{ fontSize: 35, color: "#79a617", marginLeft: "auto", marginRight: "10rem" }}
             >
               {WPM}
             </Typography>
           </div>
           <div style={{ display: "flex" }}>
-            <Typography style={{ fontSize: 35, color: "white" }}>Errors made:</Typography>
+            <Typography style={{ fontSize: 35, color: "#e7eae0" }}>Errors made:</Typography>
             <Typography
-              style={{ fontSize: 35, color: "#e2b714", marginLeft: "auto", marginRight: "10rem" }}
+              style={{ fontSize: 35, color: "#79a617", marginLeft: "auto", marginRight: "10rem" }}
             >
               {keyPressCounter - correctKeyPressedCounter}
             </Typography>
@@ -65,12 +65,12 @@ const Score = () => {
         </LeftContent>
 
         <RightContent>
-          <Typography style={{ fontSize: 50, textAlign: "center", color: "white" }}>
+          <Typography style={{ fontSize: 50, textAlign: "center", color: "#e7eae0" }}>
             HIGHSCORES
           </Typography>
           <WPMAndAccContainer>
-            <Typography style={{ color: "white" }}>WPM</Typography>
-            <Typography style={{ color: "white", marginLeft: "4rem" }}>ACC</Typography>
+            <Typography style={{ color: "#e7eae0" }}>WPM</Typography>
+            <Typography style={{ color: "#e7eae0", marginLeft: "4rem" }}>ACC</Typography>
           </WPMAndAccContainer>
           {highscores?.map((highscore, index) =>
             (index + 1) % 2 === 0 ? (
@@ -85,7 +85,7 @@ const Score = () => {
             ) : (
               <HighscoreCard
                 key={index}
-                color="#3a3c3e"
+                color="#48494b"
                 wpm={highscore.wpm}
                 accuracy={highscore.accuracy}
                 index={index}
@@ -119,7 +119,7 @@ const WPMAndAccContainer = styled.div`
 `;
 
 const RightContent = styled.div`
-  background-color: #323334;
+  background-color: #191a1b;
   padding: 2rem;
   margin-top: 5rem;
   width: 45%;

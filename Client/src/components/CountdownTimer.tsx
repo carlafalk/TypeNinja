@@ -34,7 +34,7 @@ const CountDownTimerContainer = styled.div`
 `;
 
 const Timer = styled.h1`
-  color: #e2b714;
+  color: #79a617;
   font-size: 100px;
   align-self: flex-end;
   margin-top: 100px;

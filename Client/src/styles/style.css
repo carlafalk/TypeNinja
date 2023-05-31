@@ -3,7 +3,7 @@
 }
 
 .border-pulse {
-  border-left: 2px solid #e2b714;
+  border-left: 2px solid #79a617;
   animation: pulse 1s ease-in-out infinite;
 }
 .invisible-border {
@@ -11,16 +11,16 @@
 }
 @keyframes pulse {
   0% {
-    border-color: #e2b714;
+    border-color: #79a617;
   }
   50% {
     border-color: #e2b51400;
   }
   100% {
-    border-color: #e2b714;
+    border-color: #79a617;
   }
 }
 
 .white {
-  color: white;
+  color: #e7eae0;
 }

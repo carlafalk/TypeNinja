@@ -87,5 +87,22 @@ namespace API.Controllers
 
             return token;
         }
+        // private JwtSecurityToken GetToken(List<Claim> authClaims)
+        // {
+        //     var secret = Environment.GetEnvironmentVariable("JWT__Secret");
+        //     var audience = Environment.GetEnvironmentVariable("JWT__ValidAudience");
+        //     var issuer = Environment.GetEnvironmentVariable("JWT__ValidIssuer");
+        //     var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+
+        //     var token = new JwtSecurityToken(
+        //         issuer: issuer,
+        //         audience: audience,
+        //         expires: DateTime.Now.AddYears(1),
+        //         claims: authClaims,
+        //         signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+        //         );
+
+        //     return token;
+        // }
     }
 }

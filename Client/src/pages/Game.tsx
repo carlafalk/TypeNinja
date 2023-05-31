@@ -188,5 +188,5 @@ const RestartContainer = styled.div`
   justify-content: center;
   font-size: 10px;
   margin-top: 50px;
-  color: #e2b714;
+  color: #79a617;
 `;

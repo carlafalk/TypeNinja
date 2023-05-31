@@ -15,7 +15,7 @@ export const Login = () => {
     <Container>
       <TitleContainer>
         <Title>TypeNinja</Title>
-        <KeyboardIcon sx={{ color: "#e2b714", position: "absolute", bottom: 38 }} />
+        <KeyboardIcon sx={{ color: "#79a617", position: "absolute", bottom: 38 }} />
       </TitleContainer>
       {showRegisterForm === false ? (
         <>
@@ -39,7 +39,7 @@ export const Login = () => {
 };
 
 const Container = styled.div`
-  background-color: #282b30;
+  background-color: #191a1b;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -53,5 +53,5 @@ const TitleContainer = styled.div`
 `;
 const Title = styled.text`
   font-size: 100px;
-  color: #fff;
+  color: #e7eae0;
 `;

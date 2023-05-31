@@ -114,7 +114,7 @@ export default WordsContainer;
 const FocusText = styledMUI(Typography)`
   font-family: "Saira Condensed";
   font-size: 20px;
-  color: #e2b714;
+  color: #79a617;
   position: absolute;
   top: 50%;
   left: 50%;
