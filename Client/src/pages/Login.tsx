@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CustomButton } from "../components/CustomButton";
 import { LoginForms } from "../components/LoginForms";
 import { RegisterForm } from "../components/RegisterForm";
+import { MatrixRainV12 } from "../components/test";
 
 export const Login = () => {
   const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
@@ -13,27 +14,30 @@ export const Login = () => {
   };
   return (
     <Container>
-      <TitleContainer>
-        <Title>TypeNinja</Title>
-        <KeyboardIcon sx={{ color: "#79a617", position: "absolute", bottom: 38 }} />
-      </TitleContainer>
-      {showRegisterForm === false ? (
-        <>
-          <LoginForms />
-          <CustomButton onClick={toggleRegisterForm}>Register</CustomButton>
-        </>
-      ) : (
-        <>
-          <RegisterForm />
-          <CustomButton
-            onClick={() => {
-              toggleRegisterForm();
-            }}
-          >
-            Sign in
-          </CustomButton>
-        </>
-      )}
+      <MatrixRainV12 />
+      <Container style={{ height: "60vh", width: "50vw", zIndex: 1 }}>
+        <TitleContainer>
+          <Title>TypeNinja</Title>
+          <KeyboardIcon sx={{ color: "#e7eae0", position: "absolute", bottom: 38 }} />
+        </TitleContainer>
+        {showRegisterForm === false ? (
+          <>
+            <LoginForms />
+            <CustomButton onClick={toggleRegisterForm}>Register</CustomButton>
+          </>
+        ) : (
+          <>
+            <RegisterForm />
+            <CustomButton
+              onClick={() => {
+                toggleRegisterForm();
+              }}
+            >
+              Sign in
+            </CustomButton>
+          </>
+        )}
+      </Container>
     </Container>
   );
 };
@@ -53,5 +57,5 @@ const TitleContainer = styled.div`
 `;
 const Title = styled.text`
   font-size: 100px;
-  color: #e7eae0;
+  color: #79a617;
 `;

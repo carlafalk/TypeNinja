@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
     /* font-family: 'Saira Condensed', sans-serif !important; */
 }
-
+canvas {display: block;}
 body {
     overflow-x: hidden;
     background-color: #191a1b;

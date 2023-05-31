@@ -96,6 +96,7 @@ const ErrorMessage = styled(Typography)`
 `;
 
 const LoginInputField = styled.input`
+  z-index: 100;
   border: 1px solid #424549;
   padding: 10px;
   border-radius: 7px;
